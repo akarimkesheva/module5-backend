@@ -1,11 +1,9 @@
 const express=require ("express")
+var cors = require("cors");
 const path = require("path");
-const cors = require("cors");
 const app=express()
-const router=express.Router()
-
-app.use(express.static(path.join(__dirname, '../frontend')));
 app.use(cors());
+const router=express.Router()
 
 
 router.get("/songs", function(req, res) {
@@ -28,4 +26,7 @@ router.get("/songs", function(req, res) {
     res.json(songs);
 });
 app.use("/api", router);
-app.listen(3000)
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+});
